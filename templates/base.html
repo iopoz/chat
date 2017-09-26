@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <div class="blog-header">
+
+    </div>
+    <div class="row">
+        {% block content %}{% endblock %}
+{% block login %}
+    <div class="col-sm-3 col-sm-offset-1">
+
+        <div class="sidebar-module sidebar-module-inset">
+            <h4>Login</h4>
+            {% if not username %}
+            <div class="form-group has-error">
+                <form action="{% url 'login' %}" method="post">
+                    {% csrf_token %}
+                    {% if login_error %}
+
+                        <lable class="control-label">{{ login_error }}</lable>
+                        <br>
+                    {% endif %}
+                    <input type="text" name="username" id="username" onclick="this.value='';" onfocus="this.select()" onblur="this.value=!this.value?'* Your name':this.value;" value="* Your name" style="margin-bottom: 5px"/>
+                    <input type="text" name="password" id="password" onclick="this.value=''; this.type='password'" onfocus="this.select(); this.type='password'; this.value='';" onblur="this.value=!this.value?'* Your password':this.value;" value="* Your password" style="margin-bottom: 15px"/>
+                    <br>
+                    <div class="login-btn">
+                        <div class="col-md-6">
+                            <button class="btn btn-default btn-block" type="submit">Sign in</button>
+                        </div>
+                        <div class="col-md-6">
+                            <a class="btn btn-default btn-block" href="{% url 'register' %}" type="button">Sign up</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            {% else %}
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <div><p>You are logged as: {{ username }}</p></div>
+                    <button class="btn btn-default btn-block" type="submit">Sign Out</button>
+                </form>
+            {% endif %}
+
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block subjects %}
+    <div class="col-sm-3 col-sm-offset-1">
+
+        <div class="sidebar-module sidebar-module-inset">
+            <h4>Themes</h4>
+                <ol class="list-unstyled">
+                {% for subject in subjects %}
+                    <li><a href="#">{{ subject.subject_name }}</a></li>
+                {% endfor %}
+                </ol>
+        </div>
+
+    </div>
+{% endblock %}
+    </div>
+</div>
+
+</body>
+</html>

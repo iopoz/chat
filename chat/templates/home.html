@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+{% block title %}
+    Home page
+{% endblock %}
+
+{% block content %}
+    <div class="col-sm-8 blog-main">
+        <hr>
+        {% for room in rooms %}
+
+            <div class="blog-post">
+                <a style="text-decoration: none;" href="{% url 'chat_room' room.id %}"><h2>{{ room.room_name}}</h2></a>
+{#                <a href="#"><h2>{{ room.room_name}}</h2></a>#}
+                <div>
+                    <p>Creator: {{ room.room_creator }}</p>
+                </div>
+                <hr>
+              </div><!-- /.blog-post -->
+
+        {% endfor %}
+    </div>
+
+{% endblock %}
+

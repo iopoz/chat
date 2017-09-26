@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+.divInLine{
+    display: inline-block;
+}
+
+{% block title %}
+    Home page
+{% endblock %}
+
+{% block content %}
+    <hr>
+    <div class="col-sm-8">
+        <div>
+            {% for msg in msgs %}
+            <div>
+                <p> {{ msg.message }}</p>
+                <div style="display: inline-block" >{{ msg.msg_author }}</div>
+                <div style="display: inline-block">{{ msg.msg_created }}</div>
+            </div>
+            <hr>
+
+        {% endfor %}
+        </div>
+        {% if username %}
+        <div>
+            {{ form }}
+        </div>
+
+    {% endif %}
+
+    </div>
+
+
+{% endblock %}
