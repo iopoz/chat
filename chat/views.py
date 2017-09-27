@@ -129,4 +129,4 @@ def get_room_id(request, full=False):
         else:
             return ChatRooms.objects.get(id=ROOM_ID)
     except ValueError:
-        print('waitinf for chat room')
+        print('waiting for chat room')
