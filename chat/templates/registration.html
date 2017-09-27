@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    Регистрация
+{% endblock %}
+
+{% block sub_block %}
+<div class="col-sm-10 col-sm-offset-1">
+{% block login %}
+    <div class="login">
+        <h4>Registration</h4>
+            <div class="form-group has-error">
+                <form action="{% url 'register' %}" method="post">
+                    {% csrf_token %}
+
+                    {% if error %}
+                        <input class="form-control" type="email" name="email" id="email" onclick="this.value='';" onfocus="this.select()" onblur="this.value=!this.value?'* Ваш e-mail':this.value;" value="{{ email }}" style="margin-bottom: 5px;"/>
+                        <input class="form-control" type="text" name="username" id="username" onclick="this.value='';" onfocus="this.select()" onblur="this.value=!this.value?'* Ваш логин':this.value;" value="{{ username }}" style="margin-bottom: 5px;"/>
+                        <input class="form-control" type="text" name="first_name" id="first_name" onclick="this.value='';" onfocus="this.select()" onblur="this.value=!this.value?'* Ваше имя':this.value;" value="{{ first_name }}" style="margin-bottom: 5px"/>
+                        <input class="form-control" type="text" name="last_name" id="last_name" onclick="this.value='';" onfocus="this.select()" onblur="this.value=!this.value?' Ваша фамилия':this.value;" value=" {{ last_name }}" style="margin-bottom: 5px"/>
+                        <input class="form-control" type="text" name="password1" id="password1" onclick="this.value=''; this.type='password'" onfocus="this.select(); this.type='password'; this.value='';" onblur="if (this.value==''){this.value='* Ваш Пароль'; this.type='text'}"  value="* Ваш Пароль" style="margin-bottom: 5px"/> <!--onblur="this.value=!this.value?'* Ваш Пароль':this.value; this.type='text'"-->
+                        <input class="form-control" type="text" name="password2" id="password2" onclick="this.value=''; this.type='password'" onfocus="this.select(); this.type='password'; this.value='';" onblur="if (this.value==''){this.value='* Подтверждение Пароля'; this.type='text'}" value="* Подтверждение Пароля" style="margin-bottom: 15px"/> <!--this.value=!this.value?'* Подтверждение Пароля':this.value; this.type='text'-->
+                        <br>
+                        <ul class="control-label">Пароль должен удовлетворять сдедующим требованиям:
+                            <li>Содержать спецсимволы</li>
+                            <li>Быть длиннее 8 символов</li>
+                        </ul>
+                        {% else %}
+                        <input class="form-control" type="email" name="email" id="email" onclick="this.value='';" onfocus="this.select()" onblur="this.value=!this.value?'* Ваш e-mail':this.value;" value="* Ваш e-mail" style="margin-bottom: 5px;"/>
+                        <input class="form-control" type="text" name="username" id="username" onclick="this.value='';" onfocus="this.select()" onblur="this.value=!this.value?'* Ваш логин':this.value;" value="* Ваш логин" style="margin-bottom: 5px;"/>
+                        <input class="form-control" type="text" name="first_name" id="first_name" onclick="this.value='';" onfocus="this.select()" onblur="this.value=!this.value?'* Ваше имя':this.value;" value="* Ваше имя" style="margin-bottom: 5px"/>
+                        <input class="form-control" type="text" name="last_name" id="last_name" onclick="this.value='';" onfocus="this.select()" onblur="this.value=!this.value?' Ваша фамилия':this.value;" value=" Ваша фамилия" style="margin-bottom: 5px"/>
+                        <input class="form-control" type="text" name="password1" id="password1" onclick="this.value=''; this.type='password'" onfocus="this.select(); this.type='password'; this.value='';" onblur="if (this.value==''){this.value='* Ваш Пароль'; this.type='text'}" value="* Ваш Пароль" style="margin-bottom: 5px"/>
+                        <input class="form-control" type="text" name="password2" id="password2" onclick="this.value=''; this.type='password'" onfocus="this.select(); this.type='password'; this.value='';" onblur="if (this.value==''){this.value='* Подтверждение Пароля'; this.type='text'}" value="* Подтверждение Пароля" style="margin-bottom: 15px"/>
+                    {% endif %}
+                    <div class="login-btn">
+                        <div class="col-md-12">
+                            <button class="btn btn-default btn-block" type="submit" style="margin-bottom: 30px">Sign Up</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+    </div>
+
+{% endblock %}
+</div>
+{% endblock %}

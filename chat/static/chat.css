@@ -1,0 +1,11 @@
+#chat-bottom {
+    position: fixed;
+    bottom: 10px;
+}
+
+.panel-body {
+    overflow-x: scroll;
+    height: 85%;
+    position: fixed;
+
+}

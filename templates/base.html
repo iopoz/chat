@@ -1,10 +1,19 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
     <!-- Bootstrap core CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'chat.css' %}">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    {% block scripts %}{% endblock %}
 </head>
 <body>
 
@@ -14,9 +23,11 @@
     </div>
     <div class="row">
         {% block content %}{% endblock %}
-{% block login %}
-    <div class="col-sm-3 col-sm-offset-1">
 
+    {% block sub_block %}
+
+    <div class="col-sm-3 col-sm-offset-1">
+        {% block login %}
         <div class="sidebar-module sidebar-module-inset">
             <h4>Login</h4>
             {% if not username %}
@@ -28,8 +39,8 @@
                         <lable class="control-label">{{ login_error }}</lable>
                         <br>
                     {% endif %}
-                    <input type="text" name="username" id="username" onclick="this.value='';" onfocus="this.select()" onblur="this.value=!this.value?'* Your name':this.value;" value="* Your name" style="margin-bottom: 5px"/>
-                    <input type="text" name="password" id="password" onclick="this.value=''; this.type='password'" onfocus="this.select(); this.type='password'; this.value='';" onblur="this.value=!this.value?'* Your password':this.value;" value="* Your password" style="margin-bottom: 15px"/>
+                    <input class="form-control" type="text" name="username" id="username" onclick="this.value='';" onfocus="this.select()" onblur="this.value=!this.value?'* Your name':this.value;" value="* Your name" style="margin-bottom: 5px"/>
+                    <input class="form-control" type="text" name="password" id="password" onclick="this.value=''; this.type='password'" onfocus="this.select(); this.type='password'; this.value='';" onblur="this.value=!this.value?'* Your password':this.value;" value="* Your password" style="margin-bottom: 15px"/>
                     <br>
                     <div class="login-btn">
                         <div class="col-md-6">
@@ -50,13 +61,8 @@
             {% endif %}
 
         </div>
-
-    </div>
-{% endblock %}
-
-{% block subjects %}
-    <div class="col-sm-3 col-sm-offset-1">
-
+        {% endblock %}
+    {% block subjects %}
         <div class="sidebar-module sidebar-module-inset">
             <h4>Themes</h4>
                 <ol class="list-unstyled">
@@ -66,10 +72,16 @@
                 </ol>
         </div>
 
+    {% endblock %}
     </div>
-{% endblock %}
+
+    {% endblock %}
+
+
+
     </div>
 </div>
 
 </body>
+<script src="{% static 'chat.js' %}"></script>
 </html>

@@ -1,0 +1,31 @@
+{% for msg in msgs %}
+    {% if msg.msg_author == request.user %}
+        <li class="text-right list-group-item">{{ msg.message }}
+            <hr>
+            <div class="text-right inline-related">
+                <div>
+                    {{ msg.msg_author }}
+                </div>
+                <div>
+                    {{ msg.msg_created }}
+                </div>
+            </div>
+        </li>
+        <br>
+    {% else %}
+        <li class="text-left list-group-item">{{ msg.message }}
+            <hr>
+            <div class="text-left inline-related">
+                <div>
+                    {{ msg.msg_author }}
+                </div>
+                <div>
+                    {{ msg.msg_created }}
+                </div>
+            </div>
+        </li>
+        <br>
+    {% endif %}
+{% empty %}
+    <li class="text-right list-group-item">No messages yet!</li>
+{% endfor %}

@@ -1,36 +1,72 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 
-.divInLine{
-    display: inline-block;
-}
+{% block scripts %}
+
+{% endblock %}
 
 {% block title %}
-    Home page
+    Chat room {{ chat_room }}
 {% endblock %}
 
 {% block content %}
     <hr>
-    <div class="col-sm-8">
-        <div>
-            {% for msg in msgs %}
-            <div>
-                <p> {{ msg.message }}</p>
-                <div style="display: inline-block" >{{ msg.msg_author }}</div>
-                <div style="display: inline-block">{{ msg.msg_created }}</div>
-            </div>
-            <hr>
+    <div class="row1">
+    <div class="col-sm-7">
+        <div id="chat-body" class="panel panel-default">
+            <div class="panel-heading">Chat Box</div>
+            <div id="msg-list-div" class="col-sm-5 panel-body">
+                <ul id="msg-list" class="list-group">
+                    {% for msg in msgs %}
+                        {% if msg.msg_author == request.user %}
+                            <li class="text-right list-group-item">{{ msg.message }}
+                                <hr>
+                                <div class="text-right inline-related">
+                                    <div>
+                                        {{ msg.msg_author }}
+                                    </div>
+                                    <div>
+                                        {{ msg.msg_created }}
+                                    </div>
+                                </div>
+                            </li>
+                            <br>
+                        {% else %}
+                            <li class="text-left list-group-item">{{ msg.message }}
+                                <hr>
+                                <div class="text-left inline-related">
+                                    <div>
+                                        {{ msg.msg_author }}
+                                    </div>
+                                    <div>
+                                        {{ msg.msg_created }}
+                                    </div>
+                                </div>
+                            </li>
+                            <br>
+                        {% endif %}
+                    {% empty %}
+                        <li class="text-right list-group-item">No messages yet!</li>
+                    {% endfor %}
+                    <script>
+                        var chatlist = document.getElementById('msg-list-div');
+                        chatlist.scrollTop = chatlist.scrollHeight;
+                    </script>
 
-        {% endfor %}
+                </ul>
+            </div>
         </div>
         {% if username %}
-        <div>
-            {{ form }}
-        </div>
 
-    {% endif %}
-
+            <form id="chat-form" action="{% url 'add_post'%}" method="post">
+                <div id="chat-bottom" class="input-group col-sm-5 inline-group">
+                <input type="text" id="chat-msg" name="chat-msg" class="form-control"/>
+                <span class="input-group-btn">
+                    <input class="btn btn-default" id="send" type="submit" value="Send"/>
+                </span>
+                </div>
+            </form>
+        {% endif %}
     </div>
-
-
+    </div>
 {% endblock %}
